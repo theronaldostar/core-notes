@@ -28,7 +28,7 @@ const InputSearch = (props: InputSearchProps) => {
 	return (
 		<div className="shadow-primary border-note-default w-48p flex items-center rounded border p-2 py-1.5">
 			<input
-				className="text-input w-full text-xs leading-tight outline-none"
+				className="text-input w-full leading-tight outline-none"
 				placeholder="Search notes"
 				onChange={({ target: { value } }) => {
 					handleSearch(value);

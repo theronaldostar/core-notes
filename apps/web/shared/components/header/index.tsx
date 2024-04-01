@@ -2,7 +2,7 @@ import Image from "next/image";
 
 import { logo } from "@app/web/shared/assets";
 import { InputSearch } from "@app/web/shared/components/header/search";
-import { XIcon } from "@app/web/shared/assets/icon";
+import { XMark } from "@app/web/shared/assets/icon";
 
 type HeaderProps = {
 	onSearch?: (value: string) => void;
@@ -20,7 +20,7 @@ const Header = (props: HeaderProps) => {
 				</div>
 				<InputSearch onChange={onSearch} />
 			</div>
-			<XIcon className="h-5 w-5" />
+			<XMark className="h-5 w-5" />
 		</header>
 	);
 };

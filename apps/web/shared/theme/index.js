@@ -16,6 +16,8 @@ const picker = {
 const colors = {
 	default: "#f0f2f5",
 	input: "#50656e",
+	fill: "#ffa000",
+	font: "#4f4f4d",
 	note: {
 		default: "#d9d9d9",
 		...picker,

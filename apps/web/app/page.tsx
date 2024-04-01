@@ -17,18 +17,13 @@ const Dashboard = () => {
 
 	useEffect(() => {
 		axios.get("http://localhost:4000/notes").then(({ data: { data } }) => setState(prev => ({ ...prev, notes: data })));
+		// console.table(state.notes?.filter(filter => filter.title.includes(state.search)));
 	}, [state.search]);
-
-	useEffect(() => {
-		console.table(state.notes?.filter(filter => filter.title.includes(state.search)));
-	}, [state]);
 
 	const handleChange = (value: string) => {
 		console.log(`Search?: ${value}`);
 		setState(prev => ({ ...prev, search: value }));
 	};
-
-	// flex-col items-center justify-evenly gap-4 overflow-y-auto
 
 	return (
 		<article className="flex size-full flex-col">
@@ -36,7 +31,7 @@ const Dashboard = () => {
 			<main className="flex flex-1 flex-col items-center justify-center gap-10 py-4">
 				<Create />
 				<section className="flex flex-wrap justify-center gap-4">
-					{/* {state.notes?.map((note, i) => (
+					{state.notes?.map((note, i) => (
 						<NoteCard
 							data={note}
 							index={i}
@@ -45,7 +40,7 @@ const Dashboard = () => {
 								console.log(`Delete: ${index}`);
 							}}
 						/>
-					))} */}
+					))}
 				</section>
 			</main>
 		</article>
