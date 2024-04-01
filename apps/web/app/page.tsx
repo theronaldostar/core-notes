@@ -28,10 +28,12 @@ const Dashboard = () => {
 		setState(prev => ({ ...prev, search: value }));
 	};
 
+	// flex-col items-center justify-evenly gap-4 overflow-y-auto
+
 	return (
 		<article className="flex size-full flex-col">
 			<Header onSearch={handleChange} />
-			<main className="flex flex-1 flex-col items-center justify-evenly gap-4 overflow-y-auto">
+			<main className="flex flex-1 flex-col items-center justify-center gap-10 py-4">
 				<Create />
 				<section className="flex flex-wrap justify-center gap-4">
 					{/* {state.notes?.map((note, i) => (

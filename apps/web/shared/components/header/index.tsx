@@ -12,7 +12,7 @@ const Header = (props: HeaderProps) => {
 	const { onSearch } = props;
 
 	return (
-		<header className="shadow-secondary flex w-full items-center justify-between bg-white px-8 py-2 max-sm:px-4">
+		<header className="shadow-secondary sticky top-0 z-50 flex w-full items-center justify-between bg-white px-8 py-2 max-sm:px-4">
 			<div className="flex w-full gap-6 max-md:gap-4 max-sm:gap-2">
 				<div className="flex items-center gap-4">
 					<Image className="h-9 w-9" src={logo} alt="app-logo" />
@@ -20,7 +20,7 @@ const Header = (props: HeaderProps) => {
 				</div>
 				<InputSearch onChange={onSearch} />
 			</div>
-			<XIcon />
+			<XIcon className="h-5 w-5" />
 		</header>
 	);
 };

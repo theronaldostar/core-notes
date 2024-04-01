@@ -35,7 +35,7 @@ const NoteCard = (props: NoteCardProps) => {
 	};
 
 	return (
-		<div className="w-98 max-h-99 max-md:w-96p flex h-full flex-col rounded-3xl p-2" style={{ backgroundColor: state.color }}>
+		<div className="w-98 h-99 max-sm:w-96p flex flex-col rounded-3xl p-2" style={{ backgroundColor: state.color }}>
 			<div className="flex items-center justify-between border-b px-4 py-2">
 				{editable.content ? (
 					<input

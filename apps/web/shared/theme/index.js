@@ -1,20 +1,24 @@
+const picker = {
+	100: "#bae2ff",
+	200: "#b9ffdd",
+	300: "#ffe8ac",
+	400: "#ffcab9",
+	500: "#f99494",
+	600: "#9dd6ff",
+	700: "#eca1ff",
+	800: "#daff8b",
+	900: "#ffa285",
+	1000: "#cdcdcd",
+	1100: "#979797",
+	1200: "#a99a7c",
+};
+
 const colors = {
 	default: "#f0f2f5",
 	input: "#50656e",
 	note: {
 		default: "#d9d9d9",
-		100: "#bae2ff",
-		200: "#b9ffdd",
-		300: "#ffe8ac",
-		400: "#ffcab9",
-		500: "#f99494",
-		600: "#9dd6ff",
-		700: "#eca1ff",
-		800: "#daff8b",
-		900: "#ffa285",
-		1000: "#cdcdcd",
-		1100: "#979797",
-		1200: "#a99a7c",
+		...picker,
 	},
 };
 
@@ -70,6 +74,7 @@ const themeconfig = {
 	width,
 	maxWidth,
 	minWidth,
+	picker,
 };
 
 module.exports = themeconfig;

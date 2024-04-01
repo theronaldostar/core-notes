@@ -17,11 +17,11 @@ const Create = () => {
 
 	return (
 		<div className="max-w-100 max-md:w-96p shadow-primary border-note-default flex w-full flex-col overflow-hidden rounded border bg-white max-sm:rounded-3xl">
-			<div className="flex items-center justify-between border-b px-4 py-2 max-sm:px-4">
+			<div className="flex items-center justify-between border-b px-4 py-2 max-sm:px-6">
 				<input maxLength={100} className="w-full font-semibold text-[#333333] outline-none" placeholder="Title" />
 				<Favorite className="h-5 w-5 cursor-pointer" onClick={handleFavorite} />
 			</div>
-			<div className="flex size-full px-4 py-2 max-sm:p-4">
+			<div className="flex size-full px-4 py-2 max-sm:px-6">
 				<textarea
 					maxLength={1000}
 					className="text-input flex max-h-24 min-h-14 flex-1 outline-none"
