@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { Fill, LitStar, Pencil, Star, XMark } from "@app/web/shared/assets";
 
-import { ColorPicker } from "@app/web/shared/components";
+import { Picker } from "@app/web/shared/components";
 
 type NoteCardProps = {
 	data: { title: string; content: string; color: string; favorite: boolean };
@@ -79,7 +79,7 @@ const NoteCard = (props: NoteCardProps) => {
 					<div className="relative gap-2">
 						<Fill onClick={() => setEditable(prev => ({ ...prev, color: !prev.color }))} />
 						{editable.color && (
-							<ColorPicker
+							<Picker
 								onChange={color => {
 									setState(prev => ({ ...prev, color }));
 									setEditable(prev => ({ ...prev, color: false }));
@@ -95,4 +95,4 @@ const NoteCard = (props: NoteCardProps) => {
 	);
 };
 
-export { NoteCard };
+export { NoteCard, type NoteCardProps };

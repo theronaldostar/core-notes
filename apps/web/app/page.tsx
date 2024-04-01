@@ -2,22 +2,39 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import { CreateNote, Header, NoteCard } from "@app/web/shared/components";
+import { Create, Header, NoteCard, type NoteCardProps } from "@app/web/shared/components";
+
+type DashboardState = {
+	search: null | string;
+	notes: NoteCardProps["data"][];
+};
 
 const Dashboard = () => {
-	const [state, setState] = useState([]);
+	const [state, setState] = useState<DashboardState>({
+		search: "",
+		notes: [],
+	});
 
 	useEffect(() => {
-		axios.get("http://localhost:4000/notes").then(({ data: { data } }) => setState(data));
-	}, []);
+		axios.get("http://localhost:4000/notes").then(({ data: { data } }) => setState(prev => ({ ...prev, notes: data })));
+	}, [state.search]);
+
+	useEffect(() => {
+		console.table(state.notes?.filter(filter => filter.title.includes(state.search)));
+	}, [state]);
+
+	const handleChange = (value: string) => {
+		console.log(`Search?: ${value}`);
+		setState(prev => ({ ...prev, search: value }));
+	};
 
 	return (
-		<div className="flex size-full flex-col">
-			<Header />
-			<div className="flex flex-1 flex-col items-center justify-evenly gap-4 overflow-y-auto">
-				<CreateNote />
-				<div className="flex flex-wrap justify-center gap-4">
-					{state?.map((note, i) => (
+		<article className="flex size-full flex-col">
+			<Header onSearch={handleChange} />
+			<main className="flex flex-1 flex-col items-center justify-evenly gap-4 overflow-y-auto">
+				<Create />
+				<section className="flex flex-wrap justify-center gap-4">
+					{/* {state.notes?.map((note, i) => (
 						<NoteCard
 							data={note}
 							index={i}
@@ -26,10 +43,10 @@ const Dashboard = () => {
 								console.log(`Delete: ${index}`);
 							}}
 						/>
-					))}
-				</div>
-			</div>
-		</div>
+					))} */}
+				</section>
+			</main>
+		</article>
 	);
 };
 

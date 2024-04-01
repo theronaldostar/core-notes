@@ -1,14 +1,14 @@
-import { colors } from "@app/web/shared/theme";
 import { Circle } from "@app/web/shared/assets/icon";
+import { colors } from "@app/web/shared/theme";
 
-type ColorPickerProps = {
+type PickerProps = {
 	onChange: (value: string) => void;
 };
 
-const ColorPicker = (props: ColorPickerProps) => {
+const Picker = (props: PickerProps) => {
 	const { onChange, ...rest } = props;
 
-	const entries = Object.entries(colors.notes);
+	const entries = Object.entries(colors.note);
 
 	return (
 		<div className="border-default absolute z-10 flex flex-col gap-2 rounded-lg border bg-slate-400 p-2 hover:z-40" {...rest}>
@@ -23,4 +23,4 @@ const ColorPicker = (props: ColorPickerProps) => {
 	);
 };
 
-export { ColorPicker, type ColorPickerProps };
+export { Picker, type PickerProps };

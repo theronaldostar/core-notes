@@ -1,6 +1,8 @@
 const colors = {
-	default: "#d9d9d9",
-	notes: {
+	default: "#f0f2f5",
+	input: "#50656e",
+	note: {
+		default: "#d9d9d9",
 		100: "#bae2ff",
 		200: "#b9ffdd",
 		300: "#ffe8ac",
@@ -21,14 +23,17 @@ const backgroundColor = {
 };
 
 const boxShadow = {
-	primary: "1px 1px 3px 0px rgb(0,0,0, 25%)",
+	primary: "1px 1px 3px 0 rgb(0,0,0, 25%)",
+	secondary: "0 1px 7px 0 rgb(149,149,149, 25%)",
 };
 
 const size = {
+	"48p": "48%",
 	"96p": "96%",
 	"98": "24.375rem",
 	"99": "27.349rem",
 	"100": "33.125rem",
+	"110": "33.136rem",
 };
 
 const height = {
@@ -54,8 +59,6 @@ const maxWidth = {
 const minWidth = {
 	...width,
 };
-
-// /** @type {import("tailwindcss").Config["theme"]} */
 
 const themeconfig = {
 	colors,

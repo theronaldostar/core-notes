@@ -1,23 +1,26 @@
-import { useEffect, useState } from "react";
 import Image from "next/image";
 
 import { logo } from "@app/web/shared/assets";
 import { InputSearch } from "@app/web/shared/components/header/search";
+import { XIcon } from "@app/web/shared/assets/icon";
 
-const Header = () => {
-	const [state, setState] = useState({});
+type HeaderProps = {
+	onSearch?: (value: string) => void;
+};
 
-	useEffect(() => {}, [state]);
-
-	const handleChange = () => {};
+const Header = (props: HeaderProps) => {
+	const { onSearch } = props;
 
 	return (
-		<header className="flex w-full items-center gap-4 bg-white px-3 py-2 shadow-md">
-			<div className="flex items-center gap-4">
-				<Image src={logo} alt="app-logo" />
-				<label className="text-[#455A64]">CoreNotes</label>
+		<header className="shadow-secondary flex w-full items-center justify-between bg-white px-8 py-2 max-sm:px-4">
+			<div className="flex w-full gap-6 max-md:gap-4 max-sm:gap-2">
+				<div className="flex items-center gap-4">
+					<Image className="h-9 w-9" src={logo} alt="app-logo" />
+					<label className="truncate text-sm text-[#455a64]">CoreNotes</label>
+				</div>
+				<InputSearch onChange={onSearch} />
 			</div>
-			<InputSearch />
+			<XIcon />
 		</header>
 	);
 };
