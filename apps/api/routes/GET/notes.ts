@@ -1,17 +1,15 @@
 import type { Request, Response } from "express";
 
-import { db } from "@app/api/config";
+import { db, msgError } from "@app/api/config";
 
-const Notes = (req: Request, res: Response) => {
-	const select = "SELECT * FROM `notes`;";
+export default (req: Request, res: Response) => {
+	const query = "SELECT * FROM `notes` n1 ORDER BY n1.favorite DESC;";
 
-	db.query(select, [], (error, result) => {
+	db.query(query, null, (error, result) => {
 		if (error) {
-			console.error("[server]: An error occurred during the connection to the database..");
+			msgError();
 			return res.status(400).json({ status: false, ...error });
 		}
 		res.status(202).json({ status: true, data: result });
 	});
 };
-
-export default Notes;
