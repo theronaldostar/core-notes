@@ -15,7 +15,8 @@ const message = `[server] Started on: http://localhost:${port}/ ou http://${addr
 
 $.use((_, res, next) => {
 	res.setHeader("Access-Control-Allow-Origin", "*");
-	res.setHeader("Access-Control-Allow-Methods", "OPTIONS, DELETE, GET, POST, PUT");
+	res.setHeader("Access-Control-Allow-Methods", "OPTIONS, HEAD, DELETE, GET, POST, PUT");
+	res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 	res.setHeader("Access-Control-Allow-Credentials", "true");
 	next();
 });

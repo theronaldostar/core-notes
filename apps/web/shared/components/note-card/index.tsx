@@ -1,4 +1,5 @@
-import { useState } from "react";
+import axios from "axios";
+import { useCallback, useState } from "react";
 
 import { Fill, FillCircle, LitStar, Pencil, PencilCircle, Star, XMark } from "@app/web/shared/assets";
 import { Picker } from "@app/web/shared/components";
@@ -26,18 +27,25 @@ const NoteCard = (props: NoteCardProps) => {
 
 	const [state, setState] = useState(data);
 
+	const cursor = edit.content ? "cursor-pointer" : "cursor-not-allowed";
+
 	const FavoriteIcon = !state.favorite ? Star : LitStar;
 	const FillIcon = !edit.color ? Fill : FillCircle;
 	const Pencilcon = !edit.content ? Pencil : PencilCircle;
 
-	const handleChange = (i: string, value: string) => setState(prev => ({ ...prev, [i]: value }));
-	const handleFavorite = async () => {
-		await setState(prev => ({ ...prev, favorite: prev.favorite ? 0 : 1 }));
-		handleSubmit();
+	const handleEdit = (i: string, value?: boolean) => {
+		if (i === "color" && !edit.content) return;
+		setEdit(prev => ({ ...prev, [i]: value ?? !prev[i] }));
 	};
 
+	const handleState = useCallback((i: string, value: string) => setState(prev => ({ ...prev, [i]: value })), []);
+
 	const handleSubmit = () => {
-		console.log(state);
+		const url = `http://localhost:4000/change-note/${state.id}`;
+		axios.put(url, state).finally(() => {
+			handleEdit("content", false);
+			alert("Note updated successfully!");
+		});
 	};
 
 	return (
@@ -47,7 +55,7 @@ const NoteCard = (props: NoteCardProps) => {
 					{edit.content ? (
 						<input
 							className="w-full rounded-md bg-slate-200/10 outline-none"
-							onChange={({ target: { value } }) => handleChange("title", value)}
+							onChange={({ target: { value } }) => handleState("title", value)}
 							placeholder="Title"
 							value={state.title}
 						/>
@@ -55,7 +63,13 @@ const NoteCard = (props: NoteCardProps) => {
 						<label className="text-base font-semibold">{state.title || "Blank note title!"}</label>
 					)}
 				</>
-				<FavoriteIcon className="h-6 w-6 cursor-pointer" onClick={handleFavorite} />
+
+				<FavoriteIcon
+					className={`h-6 w-6 ${cursor}`}
+					onClick={() => {
+						edit.content && setState(prev => ({ ...prev, favorite: prev.favorite ? 0 : 1 }));
+					}}
+				/>
 			</div>
 
 			<div className="text-font flex flex-1 overflow-hidden p-2 px-6">
@@ -63,7 +77,7 @@ const NoteCard = (props: NoteCardProps) => {
 					{edit.content ? (
 						<textarea
 							className="size-full max-h-80 min-h-40 rounded-md bg-slate-200/20 outline-none"
-							onChange={({ target: { value } }) => handleChange("content", value)}
+							onChange={({ target: { value } }) => handleState("content", value)}
 							placeholder="Note content"
 							value={state.content}
 						/>
@@ -78,25 +92,24 @@ const NoteCard = (props: NoteCardProps) => {
 					<Pencilcon
 						className="h-8 w-8 cursor-pointer"
 						onClick={() => {
-							if (edit.content) handleSubmit();
-							setEdit(prev => ({ ...prev, content: !prev.content }));
+							!edit.content ? handleEdit("content") : handleSubmit();
 						}}
 					/>
 
 					<div className="relative gap-2">
-						<FillIcon className="h-8 w-8 cursor-pointer" onClick={() => setEdit(prev => ({ ...prev, color: !prev.color }))} />
+						<FillIcon className={`h-8 w-8 ${cursor}`} onClick={() => handleEdit("color")} />
 						{edit.color && (
 							<Picker
 								onChange={color => {
-									setState(prev => ({ ...prev, color }));
-									setEdit(prev => ({ ...prev, color: false }));
+									handleState("color", color);
+									handleEdit("color", false);
 								}}
 							/>
 						)}
 					</div>
 				</div>
 
-				<XMark className="cursor-pointer" onClick={() => onDelete(data.id)} />
+				<XMark className={`${cursor}`} onClick={() => edit.content && onDelete(data.id)} />
 			</div>
 		</div>
 	);

@@ -27,14 +27,18 @@ const Dashboard = () => {
 
 	const filtered = state.filter(filter => filter.title?.includes(search));
 
-	const handleFetch = async () => {
+	const handleFetch = () => {
 		const url = "http://localhost:4000/notes";
-		return await axios.get(url).then(({ data: { data } }) => setState(data));
+		axios.get(url).then(({ data: { data } }) => setState(data));
 	};
 
 	const handleDelete = (id: number) => {
 		const url = `http://localhost:4000/delete-note/${id}`;
-		axios.delete(url).then(() => handleFetch());
+		axios
+			.delete(url)
+			.then(({ data: { data } }) => setState(data[1]))
+			.finally(() => console.warn("deleted"))
+			.catch(() => alert("Erro ao excluir a nota"));
 	};
 
 	return (
@@ -43,11 +47,7 @@ const Dashboard = () => {
 			<main className="flex flex-1 flex-col items-center justify-center gap-10 py-4">
 				<Create />
 				<section className="flex flex-wrap justify-center gap-4">
-					{filtered.length >= 1 ? (
-						filtered.filter(filter => filter.title?.includes(search)).map((note, i) => <NoteCard data={note} key={i} onDelete={handleDelete} />)
-					) : (
-						<Notfound />
-					)}
+					{filtered.length >= 1 ? filtered.map(note => <NoteCard data={note} key={note.id} onDelete={handleDelete} />) : <Notfound />}
 				</section>
 			</main>
 		</article>
