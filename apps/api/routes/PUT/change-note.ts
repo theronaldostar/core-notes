@@ -13,6 +13,6 @@ export default ({ body, params }: Request, res: Response) => {
 			msgError();
 			return res.status(400).json({ status: false, ...error });
 		}
-		res.status(200).json({ status: true });
+		res.status(202).json({ status: true });
 	});
 };

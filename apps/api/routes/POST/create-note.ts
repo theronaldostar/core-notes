@@ -12,6 +12,6 @@ export default ({ body }: Request, res: Response) => {
 			msgError();
 			return res.status(400).json({ status: false, ...error });
 		}
-		res.status(202).json({ status: true, data: body });
+		res.status(201).json({ status: true, data: body });
 	});
 };

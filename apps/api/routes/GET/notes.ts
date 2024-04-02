@@ -10,6 +10,6 @@ export default (req: Request, res: Response) => {
 			msgError();
 			return res.status(400).json({ status: false, ...error });
 		}
-		res.status(202).json({ status: true, data: result });
+		res.status(200).json({ status: true, data: result });
 	});
 };

@@ -1,6 +1,7 @@
 "use client";
-import { useEffect, useState } from "react";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 import { Create, Header, NoteCard } from "@app/web/shared/components";
 
@@ -14,20 +15,27 @@ const Notfound = () => (
 );
 
 const Dashboard = () => {
-	const [search, setSearch] = useState("");
+	const params = useSearchParams();
+
+	const [search, setSearch] = useState(params.get("search") || "");
 	const [state, setState] = useState([]);
 
 	useEffect(() => {
-		fetchData().then(() => {});
+		handleFetch();
 		// eslint-disable-next-line
 	}, [search]);
 
-	const fetchData = async () => {
+	const filtered = state.filter(filter => filter.title?.includes(search));
+
+	const handleFetch = async () => {
 		const url = "http://localhost:4000/notes";
 		return await axios.get(url).then(({ data: { data } }) => setState(data));
 	};
 
-	const filtered = state.filter(filter => filter.title?.includes(search));
+	const handleDelete = (id: number) => {
+		const url = `http://localhost:4000/delete-note/${id}`;
+		axios.delete(url).then(() => handleFetch());
+	};
 
 	return (
 		<article className="flex size-full flex-col">
@@ -36,18 +44,7 @@ const Dashboard = () => {
 				<Create />
 				<section className="flex flex-wrap justify-center gap-4">
 					{filtered.length >= 1 ? (
-						filtered
-							.filter(filter => filter.title?.includes(search))
-							.map((note, i) => (
-								<NoteCard
-									data={note}
-									index={i}
-									key={i}
-									onDelete={index => {
-										console.log(`Delete: ${index}`);
-									}}
-								/>
-							))
+						filtered.filter(filter => filter.title?.includes(search)).map((note, i) => <NoteCard data={note} key={i} onDelete={handleDelete} />)
 					) : (
 						<Notfound />
 					)}
