@@ -14,11 +14,12 @@ type StateProps = {
 
 type NoteCardProps = {
 	data: StateProps;
+	onChange: () => void;
 	onDelete: (index: number) => void;
 };
 
 const NoteCard = (props: NoteCardProps) => {
-	const { data, onDelete } = props;
+	const { data, onChange, onDelete } = props;
 
 	const [edit, setEdit] = useState({
 		color: false,
@@ -33,18 +34,18 @@ const NoteCard = (props: NoteCardProps) => {
 	const FillIcon = !edit.color ? Fill : FillCircle;
 	const Pencilcon = !edit.content ? Pencil : PencilCircle;
 
-	const handleEdit = (i: string, value?: boolean) => {
-		if (i === "color" && !edit.content) return;
-		setEdit(prev => ({ ...prev, [i]: value ?? !prev[i] }));
+	const handleEdit = (index: string, value?: boolean) => {
+		if (index === "color" && !edit.content) return;
+		setEdit(prev => ({ ...prev, [index]: value ?? !prev[index] }));
 	};
 
-	const handleState = useCallback((i: string, value: string) => setState(prev => ({ ...prev, [i]: value })), []);
+	const handleState = useCallback((index: string, value: string) => setState(prev => ({ ...prev, [index]: value })), []);
 
 	const handleSubmit = () => {
 		const url = `http://localhost:4000/change-note/${state.id}`;
 		axios.put(url, state).finally(() => {
 			handleEdit("content", false);
-			alert("Note updated successfully!");
+			onChange();
 		});
 	};
 
@@ -109,7 +110,12 @@ const NoteCard = (props: NoteCardProps) => {
 					</div>
 				</div>
 
-				<XMark className={`${cursor}`} onClick={() => edit.content && onDelete(data.id)} />
+				<XMark
+					className={`${cursor}`}
+					onClick={() => {
+						if (edit.content) onDelete(data.id);
+					}}
+				/>
 			</div>
 		</div>
 	);

@@ -45,9 +45,13 @@ const Dashboard = () => {
 		<article className="flex size-full flex-col">
 			<Header onSearch={data => setSearch(data)} />
 			<main className="flex flex-1 flex-col items-center justify-center gap-10 py-4">
-				<Create />
+				<Create onCreate={handleFetch} />
 				<section className="flex flex-wrap justify-center gap-4">
-					{filtered.length >= 1 ? filtered.map(note => <NoteCard data={note} key={note.id} onDelete={handleDelete} />) : <Notfound />}
+					{filtered.length >= 1 ? (
+						filtered.map(note => <NoteCard data={note} key={note.id} onChange={handleFetch} onDelete={handleDelete} />)
+					) : (
+						<Notfound />
+					)}
 				</section>
 			</main>
 		</article>
