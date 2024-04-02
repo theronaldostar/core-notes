@@ -1,8 +1,8 @@
 import Image from "next/image";
 
 import { logo } from "@app/web/shared/assets";
-import { InputSearch } from "@app/web/shared/components/header/search";
 import { XMark } from "@app/web/shared/assets/icon";
+import { InputSearch } from "@app/web/shared/components/search";
 
 type HeaderProps = {
 	onSearch?: (value: string) => void;

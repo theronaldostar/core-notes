@@ -38,7 +38,7 @@ const NoteCard = (props: NoteCardProps) => {
 
 	return (
 		<div className="w-98 h-99 max-sm:w-96p flex flex-col rounded-3xl" style={{ backgroundColor: state.color }}>
-			<div className="text-font flex items-center justify-between gap-2 border-b px-6 py-3">
+			<div className="text-font flex items-center justify-between gap-2 border-b border-slate-200 px-6 py-3">
 				{editable.content ? (
 					<input
 						className="w-full rounded-md bg-slate-200/10 outline-none"
@@ -57,7 +57,7 @@ const NoteCard = (props: NoteCardProps) => {
 			<div className="text-font flex flex-1 overflow-hidden p-2 px-6">
 				{editable.content ? (
 					<textarea
-						className="size-full max-h-80 min-h-40 rounded-md bg-slate-200/10 outline-none"
+						className="size-full max-h-80 min-h-40 rounded-md bg-slate-200/20 outline-none"
 						onChange={({ target: { value } }) => {
 							handleChange("content", value);
 						}}

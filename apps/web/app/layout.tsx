@@ -11,9 +11,7 @@ const RootLayout = (props: RootLayoutProps) => {
 
 	return (
 		<html lang="en">
-			<body className="bg-default flex size-full">
-				<>{children}</>
-			</body>
+			<body className="bg-default flex size-full">{children}</body>
 		</html>
 	);
 };
