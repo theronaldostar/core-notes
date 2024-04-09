@@ -5,7 +5,7 @@
 	"license": "MIT",
 	"private": true,
 	"scripts": {
-		"dev": "turbo run dev --concurrency=4",
+		"dev": "turbo run dev --concurrency=3",
 		"build": "turbo run build",
 		"lint": "turbo run lint"
 	},
