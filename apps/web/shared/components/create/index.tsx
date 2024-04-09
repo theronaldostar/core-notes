@@ -32,7 +32,7 @@ const Create = (props: CreateProps) => {
 	const handleFavorite = () => setState(prev => ({ ...prev, favorite: prev.favorite ? 0 : 1 }));
 
 	const handleSubmit = () => {
-		const url = "http://localhost:4000/create-note";
+		const url = "http://localhost:8000/api/create-note";
 		axios
 			.post(url, state)
 			.then(({ data: { data } }) => onCreate(data))

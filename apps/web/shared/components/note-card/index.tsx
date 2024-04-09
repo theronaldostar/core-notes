@@ -42,7 +42,7 @@ const NoteCard = (props: NoteCardProps) => {
 	const handleState = useCallback((index: string, value: string) => setState(prev => ({ ...prev, [index]: value })), []);
 
 	const handleSubmit = () => {
-		const url = `http://localhost:4000/change-note/${state.id}`;
+		const url = `http://localhost:8000/api/change-note/${state.id}`;
 		axios.put(url, state).finally(() => {
 			handleEdit("content", false);
 			onChange();
@@ -66,9 +66,10 @@ const NoteCard = (props: NoteCardProps) => {
 				</>
 
 				<FavoriteIcon
-					className={`h-6 w-6 ${cursor}`}
+					className={`min-h-6 min-w-6 ${cursor}`}
 					onClick={() => {
 						edit.content && setState(prev => ({ ...prev, favorite: prev.favorite ? 0 : 1 }));
+						console.log(edit.content);
 					}}
 				/>
 			</div>

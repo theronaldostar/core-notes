@@ -5,7 +5,7 @@
 	"license": "MIT",
 	"private": true,
 	"scripts": {
-		"dev": "turbo run dev",
+		"dev": "turbo run dev --concurrency=4",
 		"build": "turbo run build",
 		"lint": "turbo run lint"
 	},
@@ -35,7 +35,7 @@
 		"eslint-plugin-react-refresh": "^0.4.6",
 		"prettier-plugin-tailwindcss": "^0.5.12",
 		"typescript": "^5.4.3",
-		"turbo": "^1.13.1"
+		"turbo": "^1.13.2"
 	},
 	"workspaces": [
 		"apps/*",

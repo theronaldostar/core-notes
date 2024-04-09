@@ -25,20 +25,20 @@ const Dashboard = () => {
 		// eslint-disable-next-line
 	}, [search]);
 
-	const filtered = state.filter(filter => filter.title?.includes(search));
+	const filtered = state?.filter(filter => filter.title?.includes(search));
 
 	const handleFetch = () => {
-		const url = "http://localhost:4000/notes";
+		const url = "http://localhost:8000/api/notes";
 		axios.get(url).then(({ data: { data } }) => setState(data));
 	};
 
 	const handleDelete = (id: number) => {
-		const url = `http://localhost:4000/delete-note/${id}`;
+		const url = `http://localhost:8000/api/delete-note/${id}`;
 		axios
 			.delete(url)
-			.then(({ data: { data } }) => setState(data[1]))
-			.finally(() => console.warn("deleted"))
-			.catch(() => alert("Erro ao excluir a nota"));
+			.then(({ data: { data } }) => setState(data))
+			.finally(() => alert("Note deleted successfully!"))
+			.catch(() => alert("Error deleting note!"));
 	};
 
 	return (

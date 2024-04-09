@@ -6,7 +6,7 @@ export default ({ body, params }: Request, res: Response) => {
 	const { id } = params;
 	const { title, content, color, favorite } = body;
 
-	const query = "UPDATE `notes` n1 SET `title` = ?, `content` = ?, `color` = ?, `favorite` = ? WHERE n1.`id` = ?";
+	const query = "UPDATE `notes` n1 SET `title` = ?, `content` = ?, `color` = ?, `favorite` = ? WHERE n1.`id` = ?;";
 
 	db.query(query, [title, content, color, favorite, id], error => {
 		if (error) {
