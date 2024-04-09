@@ -1,6 +1,6 @@
-# Projeto de Processo Seletivo - Documentação
+# Documentação do Projeto - CoreNotes
 
-Bem-vindo ao projeto de processo seletivo! Este documento tem como objetivo fornecer instruções claras sobre como configurar e executar o projeto, além de fornecer informações sobre as tecnologias utilizadas.
+Este documento tem como objetivo fornecer instruções claras sobre como configurar e executar o projeto, além de fornecer informações sobre as tecnologias utilizadas.
 
 ## Instalação
 
@@ -60,7 +60,7 @@ Isso iniciará o servidor API/Web.
 -   MySQL: Sistema de gerenciamento de banco de dados relacional.
 -   Nodemon + ts-node: Ferramentas para reinicialização automática do servidor durante o desenvolvimento e suporte a TypeScript.
 
-Obrigado por considerar este projeto de processo seletivo! Em caso de dúvidas ou problemas, não hesite em entrar em contato!
+Obrigado por considerar este projeto! Em caso de dúvidas ou problemas, não hesite em entrar em contato!
 
 ### Email:
 
